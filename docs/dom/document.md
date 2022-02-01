@@ -645,6 +645,9 @@ console.log(div.innerHTML)
 需要注意的是，该方法不对单引号和双引号转义，所以不能用来对 HTML 属性赋值。
 
 ```html
+<a href="" onmouseover="alert('derp')" "">Bob</a>
+
+<script>
 function escapeHtml(str) {
   var div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
@@ -655,7 +658,7 @@ var userWebsite = '" onmouseover="alert(\'derp\')" "';
 var profileLink = '<a href="' + escapeHtml(userWebsite) + '">Bob</a>';
 var div = document.getElementById('target');
 div.innerHTML = profileLink;
-// <a href="" onmouseover="alert('derp')" "">Bob</a>
+</script>
 ```
 
 上面代码中，由于`createTextNode`方法不转义双引号，导致`onmouseover`方法被注入了代码。
