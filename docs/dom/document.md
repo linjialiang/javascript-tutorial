@@ -20,7 +20,6 @@
 以下属性是指向文档内部的某个节点的快捷方式。
 
 **（1）document.defaultView**
-
 `document.defaultView`属性返回`document`对象所属的`window`对象。如果当前文档不属于`window`对象，该属性返回`null`。
 
 ```javascript
@@ -645,6 +644,7 @@ console.log(div.innerHTML)
 需要注意的是，该方法不对单引号和双引号转义，所以不能用来对 HTML 属性赋值。
 
 ```html
+<script>
 function escapeHtml(str) {
   var div = document.createElement('div');
   div.appendChild(document.createTextNode(str));
@@ -655,7 +655,9 @@ var userWebsite = '" onmouseover="alert(\'derp\')" "';
 var profileLink = '<a href="' + escapeHtml(userWebsite) + '">Bob</a>';
 var div = document.getElementById('target');
 div.innerHTML = profileLink;
-// <a href="" onmouseover="alert('derp')" "">Bob</a>
+</script>
+
+<a href="" onmouseover="alert('derp')" "">Bob</a>
 ```
 
 上面代码中，由于`createTextNode`方法不转义双引号，导致`onmouseover`方法被注入了代码。
